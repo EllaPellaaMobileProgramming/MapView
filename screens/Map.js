@@ -5,7 +5,7 @@ import * as Location from 'expo-location'
 
 export default function Map(props) {
 
-  const [marker, setMarker] = useState(null)
+  const [markers, setMarkers] = useState([])
 
   //UseEffect
   /*useEffect(() => {
@@ -17,7 +17,9 @@ export default function Map(props) {
   //Make a marker
   const showMarker = (e) => {
     const coords = e.nativeEvent.coordinate
-    setMarker(coords)
+    var newMarkers = markers.slice()
+    newMarkers.push(coords)
+    setMarkers(newMarkers)
   }
 
   //Return
@@ -28,11 +30,14 @@ export default function Map(props) {
       mapType="satellite"
       onLongPress={showMarker}
     >
-      {marker &&
-        <Marker 
-          title="My marker" 
-          coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
-        />
+      {
+        markers.map((marker, index) => (
+          <Marker 
+            key={index}
+            title="marker"
+            coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+          />
+        ))
       }
     </MapView>
   )
