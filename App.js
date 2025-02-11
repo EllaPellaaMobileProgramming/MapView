@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import Map from './screens/Map';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Location from 'expo-location'
 import { PaperProvider } from 'react-native-paper';
 import MainAppBar from './components/MainAppBar';
@@ -47,6 +47,12 @@ export default function App() {
     }
   }
 
+  useEffect(() => {
+    (async() => {
+      getUserPosition()
+    })()
+  }, [])
+
   return (
     <PaperProvider>
       <MainAppBar 
@@ -65,10 +71,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0
   },
   
 });
