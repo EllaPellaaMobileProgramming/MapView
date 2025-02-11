@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import * as Location from 'expo-location'
 import { PaperProvider } from 'react-native-paper';
 import MainAppBar from './components/MainAppBar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native';
 
 const settings = {
   backgroundColor: '#00a484'
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0
   },
   
 });
